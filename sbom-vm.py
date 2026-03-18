@@ -267,6 +267,9 @@ class ImageMounter:
             self._run_command(["modprobe", "apfs"], check=False)
             mount_opts = ["mount", "-t", "apfs", "-o", "ro"]
             self._run_command(mount_opts + [self.mounted_partition, str(self.mount_point)])
+        elif fs_type == "xfs":
+            mount_opts = ["mount", "-t", "xfs", "-o", "ro,norecovery"]
+            self._run_command(mount_opts + [self.mounted_partition, str(self.mount_point)])
         else:
             mount_opts = ["mount", "-o", "ro"]
             if fs_type in ["ntfs", "vfat", "ufs"]:
